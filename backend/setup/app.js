@@ -7,14 +7,16 @@ require("dotenv").config();
 const authRoutes = require("./routes/authRoutes");
 const taskRoutes = require("./routes/taskRoutes");
 const profileRoutes = require("./routes/profileRoutes");
-
 app.use(express.json());
 app.use(cors());
 
 const mongoUrl = process.env.MONGODB_URL;
-mongoose.connect(mongoUrl, err => {
-  if (err) throw err;
-  console.log("Mongodb connected...");
+mongoose.connect(mongoUrl)
+.then(()=>{
+  console.log("Mongodb Connected Successfully")
+})
+.catch((err)=>{
+  console.log(err)
 });
 
 app.use("/api/auth", authRoutes);

@@ -1,29 +1,9 @@
-const mongoose = require("mongoose");
+const express = require("express");
+const router = express.Router();
+const { signup, login } = require("../controllers/authControllers");
 
-const userSchema = new mongoose.Schema({
-  name: {
-    type: String,
-    required: [true, "Please enter your name"],
-    trim: true
-  },
-  email: {
-    type: String,
-    required: [true, "Please enter your email"],
-    trim: true,
-    unique: true
-  },
-  password: {
-    type: String,
-    required: [true, "Please enter your password"],
-  },
-  joiningTime: {
-    type: Date,
-    default: Date.now
-  }
-}, {
-  timestamps: true
-});
+// Routes beginning with /api/auth
+router.post("/signup", signup);
+router.post("/login", login);
 
-
-const User = mongoose.model("User", userSchema);
-module.exports = User;
+module.exports = router;

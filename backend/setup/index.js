@@ -6,6 +6,20 @@ const cors=require("cors")
 const bodyParser=require("body-parser")
 const Content=require("./schema")
 
+require("dotenv").config();
+const authRoutes = require("./routes/authRoutes");
+const taskRoutes = require("./routes/taskRoutes");
+const profileRoutes = require("./routes/profileRoutes");
+
+
+
+
+app.use("/api/auth", authRoutes);
+app.use("/api/tasks", taskRoutes);
+app.use("/api/profile", profileRoutes);
+
+
+
 console.log(Content)
 app.use(bodyParser.urlencoded({
     extended:true
